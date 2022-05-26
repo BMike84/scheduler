@@ -26,7 +26,8 @@ export default function useApplicationData() {
     })
   },[]);
 
-    
+
+     
   const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
@@ -38,10 +39,17 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
+    const days = state.days.map((day) => {
+      if (day.appointments.includes(id)) {
+        day.spots -= 1;
+      }
+      return day;
+    });
+
     return axios
     .put(`/api/appointments/${id}`, {interview})
       .then(() => {
-        setState(prev => ({...prev, appointments}
+        setState(prev => ({...prev, appointments, days}
       ));
     })
   }
@@ -57,9 +65,16 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
+    const days = state.days.map((day) => {
+      if (day.appointments.includes(id)) {
+        day.spots += 1;
+      }
+      return day;
+    });
+
     return axios
     .delete(`/api/appointments/${id}`)
-      .then (() => setState({...state, appointments}))
+      .then (() => setState({...state, appointments, days}))
   }
 
   return { state, setDay, bookInterview, cancelInterview };
