@@ -7,6 +7,7 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "help
 import "components/Application.scss";
 
 export default function Application(props) {
+  // use for display the interview section of page
   const {
     state,
     setDay,
@@ -14,9 +15,11 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
   
+  // uses functions from selectors.js
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day)
 
+  //use to dispay all info of the interview section of the page
   const appointment = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
     return (
@@ -31,7 +34,7 @@ export default function Application(props) {
       />
     );
   })
-
+  // returns the sidebar and main interview section of page
   return (
     <main className="layout">
       <section className="sidebar">

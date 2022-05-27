@@ -4,6 +4,7 @@ import "components/InterviewerListItem.scss";
 
 export default function InterviewerListItem(props) {
 
+  //used to show which interviewer is selected
   const interviewerClass = classNames("interviewers__item", {
     "interviewers__item--selected": props.selected
   });

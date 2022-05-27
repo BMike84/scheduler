@@ -3,7 +3,7 @@ import classNames from "classnames";
 import "components/DayListItem.scss";
 
 export default function DayListItem(props) {
-  
+  //This sets default to zero for spots so we can use this for displaying appropiate message on how many spots remain
   const dayClass = classNames("day-list__item", {
     "day-list__item--selected": props.selected,
     "day-list__item--full": props.spots === 0

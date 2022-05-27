@@ -23,21 +23,27 @@ export default function Appointment(props) {
 
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
   
+  // when saving a book interview it saves the info of the student and interviewer in the slot
   const save = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer
     };
+    // this transitions into the saving wheel we see on the screen after clicking save button
+    // using bookInterview function from useApplication.js
     transition(SAVING);
     props.bookInterview(props.id, interview)
+      //this shows the interview booked on the screen
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE, true));
   }
 
+  // this adds in a confirm when clicking on the delete trash button for a booked interview
   const confirm = () => {
     transition(CONFIRM);
   }
 
+  // deletes the appointment using cancelInterview in useApplicationData.js
   const deleteAppointment = () => {
     transition(DELETE, true);
     props.cancelInterview(props.id)
@@ -45,10 +51,12 @@ export default function Appointment(props) {
       .catch(error => transition(ERROR_DELETE, true));
   }
 
+  // if clicking the edit button will transition into the edit section of the form
   const edit =() => {
     transition(EDIT)
   }
 
+  // returns all html on dependant on which section clicked
   return (
     <article className="appointment">
       <Header time={props.time} />

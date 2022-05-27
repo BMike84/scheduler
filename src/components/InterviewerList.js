@@ -5,7 +5,7 @@ import "components/InterviewerList.scss";
 
 
 export default function InterviewerList(props) {
-  
+  // when creating of edit a interview this shows all interviewer properties
   const interviewers = props.interviewers.map((interviewer) => {
     return (
       <InterviewerListItem 

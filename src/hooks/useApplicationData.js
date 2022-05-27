@@ -12,6 +12,7 @@ export default function useApplicationData() {
 
   const setDay = day => setState({ ...state, day });
 
+  // used to call the api's using promises
   useEffect(()=>{
     const dayURL = "/api/days";
     const appointmentURL = "/api/appointments";
@@ -21,8 +22,10 @@ export default function useApplicationData() {
       axios.get(dayURL),
       axios.get(appointmentURL),
       axios.get(interviewersURL)
-    ]).then((all) => {
-      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
+    ])
+    // if succuessful it will pull all the data from api's
+    .then((all) => {
+      setState(prevState => ({...prevState, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
     })
   },[]);
 
@@ -39,6 +42,7 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
+    // when a interview is booked it updates the spots remaining on sidebar without having to refresh page
     const days = state.days.map((day) => {
       if (day.appointments.includes(id)) {
         day.spots -= 1;
@@ -48,10 +52,7 @@ export default function useApplicationData() {
 
     return axios
     .put(`/api/appointments/${id}`, {interview})
-      .then(() => {
-        setState(prev => ({...prev, appointments, days}
-      ));
-    })
+    .then (() => setState({...state, appointments, days}))
   }
 
   const cancelInterview = (id) => {
@@ -65,6 +66,7 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
+    // when a interview is booked it updates the spots remaining on sidebar without having to refresh page
     const days = state.days.map((day) => {
       if (day.appointments.includes(id)) {
         day.spots += 1;
