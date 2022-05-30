@@ -32,7 +32,6 @@ export function getInterviewersForDay(state, day) {
   const result = [];
   //used to grab the specific day clicked on and show infomation
   const data = state.days.filter(d => d.name === day)
-  console.log(data)
 
   if(!data[0]) return result;
 
