@@ -8,6 +8,7 @@ import React from "react";
   The render function allows us to render Components
 */
 import { render } from "@testing-library/react";
+import Appointment from "components/Appointment/index";
 
 /*
   We import the component that we are testing
