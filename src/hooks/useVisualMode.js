@@ -4,6 +4,7 @@ export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
+  //used to tranisition to the next appropriate page
   const transition = (mode, replace = false) => {
     if (replace) {
       setMode(mode);
@@ -13,10 +14,10 @@ export default function useVisualMode(initial) {
     }
   };
 
+  //used to go back to previous state when clicking cancel buttons
   const back = () => {
     if (history.length > 1) {
       history.pop();
-      // setHistory(history)
       setHistory([...history]);
       setMode(history[history.length - 1]);
     }
