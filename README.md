@@ -15,7 +15,18 @@ Dependencies include:
 - react-dom: 16.9.0
 - react-scripts: 3.0.0
 
-## Running Webpack Development Server
+## Scheduler Api terminal 1
+
+- Fork and Clone (https://github.com/BMike84/scheduler-api) and follow instructions on readme.md
+- Needs to be run in a seperate terminal
+
+## Running Webpack Development Server terminal 2
+
+```sh
+npm start
+```
+
+## Running api
 
 ```sh
 npm start
